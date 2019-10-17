@@ -1,0 +1,31 @@
+{
+  "name": "juniorquest",
+  "version": "1.0.0",
+  "description": "GraphQL+Apollo Starter",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore --fix .",
+    "format": "prettier --ignore-path .gitignore --write \"./**/*.{js,jsx,json,scss,html}\"",
+    "dev": "concurrently -n client,server -k \"cd client && npm run start\" \"cd server && npm run dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaptainObjective/JuniorQuest.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CaptainObjective/JuniorQuest/issues"
+  },
+  "homepage": "https://github.com/CaptainObjective/JuniorQuest#readme",
+  "devDependencies": {
+    "concurrently": "^5.0.0",
+    "eslint": "^6.5.0",
+    "eslint-plugin-flowtype": "^4.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.1.1",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {}
+}
