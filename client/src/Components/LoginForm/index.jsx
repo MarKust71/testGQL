@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import { me } from '../../App';
@@ -15,6 +15,25 @@ const sign_In = gql`
   }
 `;
 
+const sign_Up = gql`
+  mutation signUp($data: UserCreateInput!) {
+    signIn(data: { email: $email, password: $password, fullName: $fullName }) {
+      id
+      email
+      fullName
+    }
+  }
+`;
+
+const Get_User = gql`
+  {
+    users {
+      id
+    }
+  }
+`;
+
+
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,10 +46,30 @@ const LoginForm = () => {
     refetchQueries: () => [{ query: me }],
   });
 
+  // const [signUp, { data }] = useMutation(sign_Up, {
+  //   variables: {
+  //     email,
+  //     password,
+  //     fullName: "Superadmin"
+  //   },
+  //   refetchQueries: () => [{ query: me }],
+  // });
+
   const onFormSubmit = e => {
-    console.log(e);
+    // console.log(e);
     signIn();
+    // signUp();
   };
+
+  const IsKnownEmail = (e) => {
+    // const { data, loading, error } = useQuery(Get_User);
+
+    // if (loading) return 'Loading...';
+    // if (error) return `Error! ${error.message}`;
+  
+    // console.log(data);
+    // return <div>Dziala1</div>;
+  }
 
   return (
     <Segment>
@@ -43,7 +82,7 @@ const LoginForm = () => {
           label="Email"
           placeholder="Email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => { IsKnownEmail(e.target.value); setEmail(e.target.value); } }
         />
         <Form.Input
           type="password"

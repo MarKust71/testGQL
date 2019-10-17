@@ -25,6 +25,8 @@ type Query {
   me: User
 
 }
+
+
 type Message {
   
   message: String!
