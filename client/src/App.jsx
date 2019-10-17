@@ -1,18 +1,12 @@
 import React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
 
 import Home from './Views/Home';
 import Login from './Views/Login';
 import { useQuery } from '@apollo/react-hooks';
 
-export const me = gql`
-  query me {
-    me {
-      email
-    }
-  }
-`;
+import { me } from './Components/Common'
 
 const App = () => {
   const { data, loading, error } = useQuery(me);

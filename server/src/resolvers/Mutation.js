@@ -2,14 +2,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Mutation = {
+
   signUp: async (parent, args, ctx, info) => {
-console.log('signUp');
     args.data.password = await bcrypt.hash(args.data.password, 10);
     const user = await ctx.prisma.mutation.createUser(args, info);
     return user;
   },
+
   signIn: async (parent, args, ctx, info) => {
-console.log('signIn');
     const user = await ctx.prisma.query.user({ where: { email: args.email } }, '{ id password }');
     if (!user) {
       throw new Error('WRONG_EMAIL');
@@ -26,11 +26,12 @@ console.log('signIn');
 
     return ctx.prisma.query.user({ where: { email: args.email } }, info);
   },
+
   signOut: async (parent, args, ctx, info) => {
-console.log('signOut');
     ctx.response.clearCookie('token');
     return { message: 'Logout' };
   }
+  
 };
 
 module.exports = Mutation;

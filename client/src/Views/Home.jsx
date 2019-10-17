@@ -1,46 +1,27 @@
 import React from 'react';
 import { Button, Segment } from 'semantic-ui-react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
-import { me } from '../App';
-
-const Get_User = gql`
-  {
-    users {
-      id
-    }
-  }
-`;
-
-const sign_Out = gql`
-   mutation {
-     signOut {
-       message
-     }
-   }
- `;
+import { me, Get_Users, sign_Out } from '../Components/Common'
 
 const Home = () => {
 
-  const { data, loading, error } = useQuery(Get_User);
+// console.log('Get_Users->', Get_Users);
+  const { data, loading, error } = useQuery(Get_Users);
+// if (data) console.log('Komponent Home->', data.users);
 
   const [signOut] = useMutation(sign_Out, { refetchQueries: () => [{ query: me}] });
 
-  console.log(signOut);
-
   const onButtonClick = (e) => {
-    console.log('Klikłeś wyloguj', e);
     signOut();
   };
 
   if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
+  if (error) return `Błąd! ${error.message}`;
 
-  console.log('Komponent Home->', data);
   return (
     <Segment>
-      Dziala1
+      <p>Tośmy w domu</p>
       <Button onClick={ (e) => onButtonClick(e) }>Wyloguj!</Button>
     </Segment>
   );
