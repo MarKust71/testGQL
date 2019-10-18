@@ -1,7 +1,6 @@
 const Query = {
 
   users: async (parent, args, ctx, info) => {
-// console.log('Query.js-users.args->', args);
     const user = await ctx.prisma.query.users(args, info);
     return user;
   },

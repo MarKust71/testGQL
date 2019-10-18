@@ -4,7 +4,7 @@ type Mutation {
 
   signUp(data: UserCreateInput!): User!
 
-  signIn(email: String!, password: String!): User
+  signIn(email: String!, password: String!): User!
 
   signOut: Message!
 

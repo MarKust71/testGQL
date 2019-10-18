@@ -6,9 +6,7 @@ import { me, Get_Users, sign_Out } from '../Components/Common'
 
 const Home = () => {
 
-// console.log('Get_Users->', Get_Users);
   const { data, loading, error } = useQuery(Get_Users);
-// if (data) console.log('Komponent Home->', data.users);
 
   const [signOut] = useMutation(sign_Out, { refetchQueries: () => [{ query: me}] });
 
@@ -16,7 +14,7 @@ const Home = () => {
     signOut();
   };
 
-  if (loading) return 'Loading...';
+  if (loading) return 'Się ładuje...';
   if (error) return `Błąd! ${error.message}`;
 
   return (
